@@ -21,5 +21,6 @@
   "license": "MIT",
   "compatibility": {
     "macroDeck": ">=3.0.0-0"
-  }
+  },
+  "repository": "https://github.com/DiegoFdezAb/MacroDeck3VolumeMixerPlugin"
 }
