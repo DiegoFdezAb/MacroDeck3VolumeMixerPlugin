@@ -1,3 +1,4 @@
+using System.Globalization;
 using MacroDeck.Sdk;
 using MacroDeck.Sdk.Actions;
 using MacroDeck.Sdk.Variables;
@@ -79,7 +80,7 @@ public sealed class PluginIntegration : IPluginIntegration, IVariableProvider
 		{
 			var safe = AudioService.SanitizeAppName(app);
 			items.Add(VariableDefinition.OnDemand($"volumemixer_app_{safe}_volume", VariableType.Numeric)
-				with { Id = $"app_{safe}_volume" });
+				with { Id = $"app_{safe}_volume", Write = new VariableWriteCapability() });
 			items.Add(VariableDefinition.OnDemand($"volumemixer_app_{safe}_muted", VariableType.Boolean)
 				with { Id = $"app_{safe}_muted" });
 		}
@@ -93,10 +94,54 @@ public sealed class PluginIntegration : IPluginIntegration, IVariableProvider
 		{
 			var name = $"volumemixer_app_{safe}_{kind}";
 			var type = kind == "volume" ? VariableType.Numeric : VariableType.Boolean;
-			return ValueTask.FromResult<VariableDefinition?>(VariableDefinition.OnDemand(name, type) with { Id = localId });
+			VariableDefinition def = VariableDefinition.OnDemand(name, type) with { Id = localId };
+			if (kind == "volume")
+			{
+				def = def with { Write = new VariableWriteCapability() };
+			}
+
+			return ValueTask.FromResult<VariableDefinition?>(def);
 		}
 
 		return ValueTask.FromResult<VariableDefinition?>(null);
+	}
+
+	public ValueTask<VariableWriteResult> SetValueAsync(string localId, object? value, CancellationToken cancellationToken = default)
+	{
+		if (!TrySplitAppId(localId, out var safe, out var kind) || safe == null || kind == null)
+		{
+			return ValueTask.FromResult(VariableWriteResult.NotFound());
+		}
+
+		if (kind != "volume")
+		{
+			return ValueTask.FromResult(VariableWriteResult.NotWritable());
+		}
+
+		if (value is not (double or int or long))
+		{
+			return ValueTask.FromResult(VariableWriteResult.InvalidValue());
+		}
+
+		if (_audio == null)
+		{
+			return ValueTask.FromResult(VariableWriteResult.Unavailable());
+		}
+
+		var volume = Math.Clamp(Convert.ToDouble(value, CultureInfo.InvariantCulture), 0, 100);
+		foreach (var session in _audio.SnapshotDefaultDeviceSessions())
+		{
+			if (!string.Equals(AudioService.SanitizeAppName(session.ProcessName), safe, StringComparison.OrdinalIgnoreCase))
+			{
+				continue;
+			}
+
+			_audio.SetAppVolume(session.ProcessName, (float)volume);
+			_logger.Information("App {App} volume set to {Volume} via slider", session.ProcessName, volume);
+			return ValueTask.FromResult(VariableWriteResult.Applied());
+		}
+
+		return ValueTask.FromResult(VariableWriteResult.Unavailable());
 	}
 
 	public ValueTask<VariableReading> ReadAsync(string localId, CancellationToken cancellationToken = default)

@@ -175,6 +175,45 @@ public sealed class VolumeMixerTests
 
 		Assert.That(reading, Is.Not.Null);
 	}
+
+	[Test]
+	public async Task Writing_volume_of_unknown_app_is_unavailable_not_applied()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var written = (await harness.Variables.SetAsync("app_nope_volume",
+			new VariableValueDto { Kind = "number", Number = 35 })).DataAs<VariableSetResult>();
+
+		Assert.That(written, Is.Not.Null);
+		Assert.That(written!.Status, Is.EqualTo("Unavailable"));
+	}
+
+	[Test]
+	public async Task Writing_muted_variable_is_refused()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var written = (await harness.Variables.SetAsync("app_nope_muted",
+			new VariableValueDto { Kind = "boolean", Boolean = true })).DataAs<VariableSetResult>();
+
+		Assert.That(written, Is.Not.Null);
+		Assert.That(written!.Status, Is.EqualTo("NotWritable"));
+	}
+
+	[Test]
+	public async Task Writing_volume_with_text_is_invalid()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var written = (await harness.Variables.SetAsync("app_nope_volume",
+			new VariableValueDto { Kind = "text", Text = "loud" })).DataAs<VariableSetResult>();
+
+		Assert.That(written, Is.Not.Null);
+		Assert.That(written!.Status, Is.EqualTo("InvalidValue"));
+	}
 }
 /// <summary>
 /// The localization set is generated from <c>Localization/*.resx</c>, so these guard the wiring rather
