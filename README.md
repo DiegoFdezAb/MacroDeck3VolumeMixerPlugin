@@ -15,6 +15,9 @@ Windows only (Windows Core Audio API). `win-x64`, framework-dependent on .NET 10
 | Set default microphone | `set-default-mic` | Switches the default recording device, with the same optional toggle |
 | Set output and microphone | `set-default-pair` | Switches an output + microphone profile in one press |
 | Refresh audio devices | `refresh-devices` | Clears the cached device lists |
+| Set app volume | `set-app-volume` | Sets the volume of one application (0-100) |
+| Volume up / down | `volume-up` / `volume-down` | Adjusts one application by 5% |
+| Toggle app mute | `toggle-mute` | Toggles mute for one application |
 
 Device pickers are dynamic: they list the currently active endpoints. A device unplugged
 between configuration and press fails the action truthfully instead of switching blindly.
@@ -29,6 +32,10 @@ between configuration and press fails the action truthfully instead of switching
 | `volumemixer_comm_mic` | Default communications recording device name |
 
 Polled every 2 seconds. Example button label: `{volumemixer_default_device}`.
+
+Per-application variables come from the variable catalog: pick an app producing
+audio and bind `volumemixer_app_<name>_volume` (0-100) or `volumemixer_app_<name>_muted`.
+Example: `Spotify: {volumemixer_app_spotify_volume}%`.
 
 ## Requirements
 
@@ -50,7 +57,6 @@ macrodeck-plugin validate --artifact ./artifacts/com.diegofdezab.volume-mixer-1.
 ## Install
 
 Use the `.macroDeckPlugin` artifact from the releases, or build it with the commands above.
-Per-application volume control from v2 is planned for a later release.
 
 ## License
 

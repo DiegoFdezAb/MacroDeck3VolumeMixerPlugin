@@ -2,7 +2,7 @@
   "$schema": "https://schemas.macro-deck.app/plugin-manifest-v1.schema.json",
   "manifestVersion": 1,
   "id": "com.diegofdezab.volume-mixer",
-  "name": "Volume Mixer",
+  "name": "VolumeMixerPlugin",
   "version": "1.0.0",
   "description": "Windows volume mixer for Macro Deck: see the default output and microphone, and switch between them from a button.",
   "icon": "Assets/icon.svg",

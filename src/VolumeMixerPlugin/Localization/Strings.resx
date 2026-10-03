@@ -115,4 +115,49 @@
   <data name="Errors.SwitchFailed" xml:space="preserve">
     <value>Switching the audio device failed.</value>
   </data>
+  <data name="Actions.SetAppVolume.Name" xml:space="preserve">
+    <value>Set app volume</value>
+  </data>
+  <data name="Actions.SetAppVolume.Description" xml:space="preserve">
+    <value>Sets the volume of a specific application.</value>
+  </data>
+  <data name="Actions.SetAppVolume.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.SetAppVolume.Volume.Label" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Actions.VolumeUp.Name" xml:space="preserve">
+    <value>Volume up</value>
+  </data>
+  <data name="Actions.VolumeUp.Description" xml:space="preserve">
+    <value>Raises the volume of a specific application by 5%.</value>
+  </data>
+  <data name="Actions.VolumeUp.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.VolumeDown.Name" xml:space="preserve">
+    <value>Volume down</value>
+  </data>
+  <data name="Actions.VolumeDown.Description" xml:space="preserve">
+    <value>Lowers the volume of a specific application by 5%.</value>
+  </data>
+  <data name="Actions.VolumeDown.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.ToggleMute.Name" xml:space="preserve">
+    <value>Toggle app mute</value>
+  </data>
+  <data name="Actions.ToggleMute.Description" xml:space="preserve">
+    <value>Toggles the mute state of a specific application.</value>
+  </data>
+  <data name="Actions.ToggleMute.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Errors.NoApps" xml:space="preserve">
+    <value>No applications are producing audio right now.</value>
+  </data>
+  <data name="Errors.AppNotFound" xml:space="preserve">
+    <value>The application has no active audio session.</value>
+  </data>
 </root>

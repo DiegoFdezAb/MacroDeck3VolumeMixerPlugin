@@ -114,6 +114,67 @@ public sealed class VolumeMixerTests
 
 		Assert.That(options, Is.Not.Null);
 	}
+
+	[Test]
+	public async Task Set_app_volume_with_unknown_app_fails()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var outcome = await harness.Actions.ExecuteAsync(
+			"set-app-volume",
+			new Dictionary<string, object?> { ["app"] = "no-such-app", ["volume"] = 40.0 });
+
+		Assert.That(outcome.Succeeded, Is.False);
+	}
+
+	[Test]
+	public async Task Volume_up_with_unknown_app_fails()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var outcome = await harness.Actions.ExecuteAsync(
+			"volume-up",
+			new Dictionary<string, object?> { ["app"] = "no-such-app" });
+
+		Assert.That(outcome.Succeeded, Is.False);
+	}
+
+	[Test]
+	public async Task Toggle_mute_with_unknown_app_fails()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var outcome = await harness.Actions.ExecuteAsync(
+			"toggle-mute",
+			new Dictionary<string, object?> { ["app"] = "no-such-app" });
+
+		Assert.That(outcome.Succeeded, Is.False);
+	}
+
+	[Test]
+	public async Task App_options_are_listed()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var options = (await harness.Actions.GetOptionsAsync("set-app-volume", "app")).DataAs<DynamicOptionsResultDto>();
+
+		Assert.That(options, Is.Not.Null);
+	}
+
+	[Test]
+	public async Task Unknown_app_variable_reads_unavailable()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		var reading = (await harness.Variables.GetAsync("app_nope_volume")).DataAs<VariableReadingDto>();
+
+		Assert.That(reading, Is.Not.Null);
+	}
 }
 /// <summary>
 /// The localization set is generated from <c>Localization/*.resx</c>, so these guard the wiring rather
