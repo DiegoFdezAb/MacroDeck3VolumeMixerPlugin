@@ -1,4 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-	<circle cx="24" cy="23" r="12" fill="#F5A623" />
-	<path d="M18 44h27a10 10 0 0 0 1-19.9A14 14 0 0 0 19 20.6 12 12 0 0 0 18 44z" fill="#4A90D9" />
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#1A202C"/>
+  
+  <!-- Speaker body -->
+  <rect x="80" y="170" width="120" height="172" rx="20" fill="#38A169"/>
+  
+  <!-- Speaker cone -->
+  <path d="M200 200 L320 100 L320 412 L200 312 Z" fill="#48BB78"/>
+  
+  <!-- Sound waves -->
+  <path d="M350 200 Q390 256 350 312" stroke="#68D391" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M390 170 Q460 256 390 342" stroke="#68D391" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M430 140 Q530 256 430 372" stroke="#68D391" stroke-width="14" fill="none" stroke-linecap="round"/>
 </svg>
