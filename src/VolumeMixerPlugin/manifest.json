@@ -22,5 +22,10 @@
   "compatibility": {
     "macroDeck": ">=3.0.0-0"
   },
-  "repository": "https://github.com/DiegoFdezAb/MacroDeck3VolumeMixerPlugin"
+  "repository": "https://github.com/DiegoFdezAb/MacroDeck3VolumeMixerPlugin",
+  "ai": {
+    "interaction": false,
+    "generatedContent": false,
+    "generatedAssets": false
+  }
 }
