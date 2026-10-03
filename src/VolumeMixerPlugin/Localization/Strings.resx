@@ -31,4 +31,133 @@
   <data name="Actions.LogMessage.Message.Placeholder" xml:space="preserve">
     <value>Hello from my plugin</value>
   </data>
+  <data name="Actions.SetOutput.Name" xml:space="preserve">
+    <value>Set default output</value>
+  </data>
+  <data name="Actions.SetOutput.Description" xml:space="preserve">
+    <value>Switches the default audio output device. Set a second device to toggle between the two.</value>
+  </data>
+  <data name="Actions.SetOutput.Device.Label" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="Actions.SetOutput.Device2.Label" xml:space="preserve">
+    <value>Second device (toggle)</value>
+  </data>
+  <data name="Actions.SetMic.Name" xml:space="preserve">
+    <value>Set default microphone</value>
+  </data>
+  <data name="Actions.SetMic.Description" xml:space="preserve">
+    <value>Switches the default microphone. Set a second microphone to toggle between the two.</value>
+  </data>
+  <data name="Actions.SetMic.Input.Label" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Actions.SetMic.Input2.Label" xml:space="preserve">
+    <value>Second microphone (toggle)</value>
+  </data>
+  <data name="Actions.SetPair.Name" xml:space="preserve">
+    <value>Set output and microphone</value>
+  </data>
+  <data name="Actions.SetPair.Description" xml:space="preserve">
+    <value>Switches output and microphone together as one audio profile.</value>
+  </data>
+  <data name="Actions.SetPair.Output.Label" xml:space="preserve">
+    <value>Output device</value>
+  </data>
+  <data name="Actions.SetPair.Output2.Label" xml:space="preserve">
+    <value>Second output (toggle)</value>
+  </data>
+  <data name="Actions.SetPair.Input.Label" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Actions.SetPair.Input2.Label" xml:space="preserve">
+    <value>Second microphone (toggle)</value>
+  </data>
+  <data name="Actions.RefreshDevices.Name" xml:space="preserve">
+    <value>Refresh audio devices</value>
+  </data>
+  <data name="Actions.RefreshDevices.Description" xml:space="preserve">
+    <value>Refreshes the cached list of audio devices.</value>
+  </data>
+  <data name="Variables.DefaultDevice.DisplayName" xml:space="preserve">
+    <value>Default output device</value>
+  </data>
+  <data name="Variables.DefaultDevice.Description" xml:space="preserve">
+    <value>The current default multimedia playback device.</value>
+  </data>
+  <data name="Variables.CommDevice.DisplayName" xml:space="preserve">
+    <value>Communications output device</value>
+  </data>
+  <data name="Variables.CommDevice.Description" xml:space="preserve">
+    <value>The current default communications playback device.</value>
+  </data>
+  <data name="Variables.DefaultMic.DisplayName" xml:space="preserve">
+    <value>Default microphone</value>
+  </data>
+  <data name="Variables.DefaultMic.Description" xml:space="preserve">
+    <value>The current default recording device.</value>
+  </data>
+  <data name="Variables.CommMic.DisplayName" xml:space="preserve">
+    <value>Communications microphone</value>
+  </data>
+  <data name="Variables.CommMic.Description" xml:space="preserve">
+    <value>The current default communications recording device.</value>
+  </data>
+  <data name="Errors.DeviceNotFound" xml:space="preserve">
+    <value>The selected audio device is not available.</value>
+  </data>
+  <data name="Errors.NoDevices" xml:space="preserve">
+    <value>No audio devices found.</value>
+  </data>
+  <data name="Errors.ToggleSameDevice" xml:space="preserve">
+    <value>The two toggle devices must be different.</value>
+  </data>
+  <data name="Errors.SwitchFailed" xml:space="preserve">
+    <value>Switching the audio device failed.</value>
+  </data>
+  <data name="Actions.SetAppVolume.Name" xml:space="preserve">
+    <value>Set app volume</value>
+  </data>
+  <data name="Actions.SetAppVolume.Description" xml:space="preserve">
+    <value>Sets the volume of a specific application.</value>
+  </data>
+  <data name="Actions.SetAppVolume.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.SetAppVolume.Volume.Label" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Actions.VolumeUp.Name" xml:space="preserve">
+    <value>Volume up</value>
+  </data>
+  <data name="Actions.VolumeUp.Description" xml:space="preserve">
+    <value>Raises the volume of a specific application by 5%.</value>
+  </data>
+  <data name="Actions.VolumeUp.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.VolumeDown.Name" xml:space="preserve">
+    <value>Volume down</value>
+  </data>
+  <data name="Actions.VolumeDown.Description" xml:space="preserve">
+    <value>Lowers the volume of a specific application by 5%.</value>
+  </data>
+  <data name="Actions.VolumeDown.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Actions.ToggleMute.Name" xml:space="preserve">
+    <value>Toggle app mute</value>
+  </data>
+  <data name="Actions.ToggleMute.Description" xml:space="preserve">
+    <value>Toggles the mute state of a specific application.</value>
+  </data>
+  <data name="Actions.ToggleMute.App.Label" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Errors.NoApps" xml:space="preserve">
+    <value>No applications are producing audio right now.</value>
+  </data>
+  <data name="Errors.AppNotFound" xml:space="preserve">
+    <value>The application has no active audio session.</value>
+  </data>
 </root>
