@@ -4,7 +4,7 @@
   "id": "com.diegofdezab.volume-mixer",
   "name": "Volume Mixer",
   "version": "1.0.0",
-  "description": "A Macro Deck plugin.",
+  "description": "Windows volume mixer for Macro Deck: see the default output and microphone, and switch between them from a button.",
   "icon": "Assets/icon.svg",
   "entrypoints": {
     "win-x64": {
