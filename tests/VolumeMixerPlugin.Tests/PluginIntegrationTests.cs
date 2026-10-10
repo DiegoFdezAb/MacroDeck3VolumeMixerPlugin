@@ -51,6 +51,7 @@ public sealed class VolumeMixerTests
 	}
 
 	[Test]
+	[Platform("Win")]
 	public async Task Refresh_devices_succeeds()
 	{
 		await using var harness = CreateHarness();
@@ -120,6 +121,7 @@ public sealed class VolumeMixerTests
 	}
 
 	[Test]
+	[Platform("Win")]
 	public async Task Output_options_are_listed()
 	{
 		await using var harness = CreateHarness();
@@ -170,6 +172,7 @@ public sealed class VolumeMixerTests
 	}
 
 	[Test]
+	[Platform("Win")]
 	public async Task App_options_are_listed()
 	{
 		await using var harness = CreateHarness();
