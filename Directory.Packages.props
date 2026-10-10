@@ -6,9 +6,11 @@
         <!-- The Macro Deck packages float to the newest published version, so no release version is
              pinned anywhere in this repository. -->
         <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
-        <!-- One knob for every Macro Deck package, so a build against a locally packed SDK is
-             `dotnet build -p:MacroDeckSdkVersion=<version>` and nothing else - see README.md. -->
-        <MacroDeckSdkVersion Condition="'$(MacroDeckSdkVersion)' == ''">3.0.0-*</MacroDeckSdkVersion>
+        <!-- Pinned, not floating: the Store refuses a build whose Macro Deck packages are older than
+             its published minimum, and its comparison ranks the `preview` line below `beta`, so the
+             newest published SDK (3.0.0-preview.10) is refused. The minimum itself passes. Raise this
+             when the Store publishes a higher minimumSdkVersion. -->
+        <MacroDeckSdkVersion Condition="'$(MacroDeckSdkVersion)' == ''">3.0.0-beta.16</MacroDeckSdkVersion>
     </PropertyGroup>
 
     <ItemGroup>
