@@ -4,7 +4,7 @@
   "id": "com.diegofdezab.volume-mixer",
   "name": "VolumeMixerPlugin",
   "version": "1.0.0",
-  "description": "Windows volume mixer for Macro Deck: see the default output and microphone, and switch between them from a button.",
+  "description": "Windows volume mixer for Macro Deck 3: see the default output and microphone, control per-app volume and mute, switch devices from a button, and bind sliders to app volume.",
   "icon": "Assets/icon.png",
   "entrypoints": {
     "win-x64": {
