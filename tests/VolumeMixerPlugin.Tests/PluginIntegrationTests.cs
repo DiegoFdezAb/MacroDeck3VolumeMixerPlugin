@@ -105,6 +105,21 @@ public sealed class VolumeMixerTests
 	}
 
 	[Test]
+	public async Task An_action_answers_instead_of_throwing_when_there_is_no_audio()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		// Windows Core Audio is COM. Anywhere else the plugin has no devices, and the contract is an
+		// answer the host can show, never an exception out of an invocation.
+		var outcome = await harness.Actions.ExecuteAsync(
+			"set-default-output",
+			new Dictionary<string, object?> { ["deviceId"] = "no-such-device" });
+
+		Assert.That(outcome, Is.Not.Null);
+	}
+
+	[Test]
 	public async Task Output_options_are_listed()
 	{
 		await using var harness = CreateHarness();

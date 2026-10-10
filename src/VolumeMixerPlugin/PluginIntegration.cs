@@ -200,7 +200,14 @@ public sealed class PluginIntegration : IPluginIntegration, IVariableProvider
 
 	public Task InitializeAsync(IIntegrationContext context)
 	{
-		_audio ??= new AudioService(_logger);
+		// Windows Core Audio is COM, so it only exists on Windows. Elsewhere the audio service stays
+		// null and every action and variable reports unavailable, which is the shape they were written
+		// for; constructing it anyway would fail initialization on a build machine.
+		if (OperatingSystem.IsWindows())
+		{
+			_audio ??= new AudioService(_logger);
+		}
+
 		_logger.Information("Initialized.");
 		return Task.CompletedTask;
 	}
