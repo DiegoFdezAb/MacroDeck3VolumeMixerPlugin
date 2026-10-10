@@ -162,14 +162,11 @@ Two things are new rather than ported:
 
 ---
 
-## Screenshots
-
-Store listings for this plugin show what it does on a deck:
+## Screenshot
 
 | Screenshot | What it shows |
 |---|---|
-| `docs/screenshots/set-default-output-toggle.png` | A button showing the current default output, toggling to a second device in one press |
-| `docs/screenshots/app-volume-slider.png` | A slider bound to `volumemixer_app_<name>_volume`, writing the app volume as it is dragged |
+| `docs/screenshots/set-default-output-toggle.png` | An action button whose label is the `{volumemixer_default_device}` variable, running the `set-default-output` action in toggle mode between two devices |
 
 ---
 
