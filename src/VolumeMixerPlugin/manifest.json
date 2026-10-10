@@ -26,6 +26,6 @@
   "ai": {
     "interaction": false,
     "generatedContent": false,
-    "generatedAssets": false
+    "generatedAssets": true
   }
 }
