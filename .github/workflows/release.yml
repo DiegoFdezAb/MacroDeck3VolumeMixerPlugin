@@ -12,3 +12,7 @@ jobs:
       version: ${{ github.event.release.tag_name }}
       source: src/VolumeMixerPlugin
       changelog: ${{ github.event.release.body }}
+      # The plugin drives Windows Core Audio through COM, so its tests only mean anything on a
+      # Windows runner. Without this they run on ubuntu and every test fails on "COM is not
+      # supported".
+      build-per-platform: true
