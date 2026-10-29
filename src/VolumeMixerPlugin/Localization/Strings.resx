@@ -160,4 +160,10 @@
   <data name="Errors.AppNotFound" xml:space="preserve">
     <value>The application has no active audio session.</value>
   </data>
+  <data name="Errors.ActiveWindowNotFound" xml:space="preserve">
+    <value>Could not determine the currently active window.</value>
+  </data>
+  <data name="Actions.ActiveWindow.Label" xml:space="preserve">
+    <value>Active Window</value>
+  </data>
 </root>

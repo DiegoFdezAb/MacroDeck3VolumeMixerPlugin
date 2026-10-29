@@ -1,6 +1,7 @@
 using MacroDeck.Localization;
 using MacroDeck.Sdk.Actions;
 using Serilog;
+using VolumeMixerPlugin.Services;
 
 namespace VolumeMixerPlugin.Actions;
 
@@ -51,9 +52,18 @@ public sealed class VolumeUpAction : IActionDefinition, IDynamicOptionsActionDef
 					MacroDeckStrings.Validation.Required(Strings.Actions.VolumeUp.App.Label())));
 			}
 
-			if (!audio.AdjustAppVolume(app, 5))
+			// Resolve the "Active Window" sentinel to the foreground process name.
+			var resolvedApp = ForegroundApp.Resolve(app);
+			if (resolvedApp == null)
 			{
-				logger.Warning("No audio session for app {App}", app);
+				logger.Warning("Could not determine the foreground application");
+				return Task.FromResult(ActionResult.Failed(ActionErrorCodes.NotFound,
+					Strings.Errors.ActiveWindowNotFound()));
+			}
+
+			if (!audio.AdjustAppVolume(resolvedApp, 5))
+			{
+				logger.Warning("No audio session for app {App}", resolvedApp);
 				return Task.FromResult(ActionResult.Failed(ActionErrorCodes.NotFound,
 					Strings.Errors.AppNotFound()));
 			}

@@ -2,6 +2,7 @@ using System.Globalization;
 using MacroDeck.Localization;
 using MacroDeck.Sdk.Actions;
 using Serilog;
+using VolumeMixerPlugin.Services;
 
 namespace VolumeMixerPlugin.Actions;
 
@@ -56,6 +57,15 @@ public sealed class SetAppVolumeAction : IActionDefinition, IDynamicOptionsActio
 					MacroDeckStrings.Validation.Required(Strings.Actions.SetAppVolume.App.Label())));
 			}
 
+			// Resolve the "Active Window" sentinel to the foreground process name.
+			var resolvedApp = ForegroundApp.Resolve(app);
+			if (resolvedApp == null)
+			{
+				logger.Warning("Could not determine the foreground application");
+				return Task.FromResult(ActionResult.Failed(ActionErrorCodes.NotFound,
+					Strings.Errors.ActiveWindowNotFound()));
+			}
+
 			if (context.Parameters.GetValueOrDefault("volume") is not double volume)
 			{
 				return Task.FromResult(ActionResult.Failed(ActionErrorCodes.InvalidParameter,
@@ -63,14 +73,14 @@ public sealed class SetAppVolumeAction : IActionDefinition, IDynamicOptionsActio
 			}
 
 			volume = Math.Clamp(Convert.ToDouble(volume, CultureInfo.InvariantCulture), 0, 100);
-			if (!audio.SetAppVolume(app, (float)volume))
+			if (!audio.SetAppVolume(resolvedApp, (float)volume))
 			{
-				logger.Warning("No audio session for app {App}", app);
+				logger.Warning("No audio session for app {App}", resolvedApp);
 				return Task.FromResult(ActionResult.Failed(ActionErrorCodes.NotFound,
 					Strings.Errors.AppNotFound()));
 			}
 
-			logger.Information("App {App} volume set to {Volume}", app, volume);
+			logger.Information("App {App} volume set to {Volume}", resolvedApp, volume);
 			return ActionResult.SucceededTask;
 		}
 	}

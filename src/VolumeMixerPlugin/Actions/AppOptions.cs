@@ -12,6 +12,7 @@ internal static class AppOptions
 		{
 			Options =
 			[
+				new ActionParameterOption { Value = ForegroundApp.Sentinel, Label = Strings.Actions.ActiveWindow.Label() },
 				.. apps.Select(a => new ActionParameterOption { Value = a, Label = a })
 			],
 			CacheSeconds = 15,

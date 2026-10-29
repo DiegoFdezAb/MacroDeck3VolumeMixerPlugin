@@ -184,6 +184,22 @@ public sealed class VolumeMixerTests
 	}
 
 	[Test]
+	[Platform("Win")]
+	public async Task App_options_include_active_window()
+	{
+		await using var harness = CreateHarness();
+		await harness.InitializeIntegrationsAsync();
+
+		foreach (var actionId in new[] { "set-app-volume", "volume-up", "volume-down", "toggle-mute" })
+		{
+			var options = (await harness.Actions.GetOptionsAsync(actionId, "app")).DataAs<DynamicOptionsResultDto>();
+			Assert.That(options, Is.Not.Null, $"Options for {actionId}");
+			Assert.That(options!.Options, Is.Not.Empty, $"Options list for {actionId}");
+			Assert.That(options.Options[0].Value, Is.EqualTo("__active_window__"), $"First option for {actionId}");
+		}
+	}
+
+	[Test]
 	public async Task Unknown_app_variable_reads_unavailable()
 	{
 		await using var harness = CreateHarness();
